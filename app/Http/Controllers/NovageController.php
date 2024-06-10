@@ -31,7 +31,6 @@ class NovageController extends Controller
 private function generateUniqueRefCode()
 {
     do {
-        // Generate a random reference code
         $ref_code = Str::random(10);
     } while (Novage::where('ref_code', $ref_code)->exists());
 

@@ -22,17 +22,21 @@ class RegistrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "required|email|unique:users,email|in:yahoo,gmail",
-            "name" => "required|string|max:255 " ,
-            "phone_number" => "required|string|max:255",
-            
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|digits:11',
+            'email' => [
+                'required',
+                'email',
+                'unique:users,email',
+                'regex:/@(gmail|yahoo)\.com$/i'
+            ],
         ];
-        
     }
+
     public function messages()
     {
         return [
-            'email.in' => 'please this accepts only email format of gmail and yahoo mails thanks.',
+            'email.regex' => 'Please use only gmail or yahoo email addresses.',
         ];
     }
 }
